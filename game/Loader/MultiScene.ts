@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import BetweenScenes, { BetweenScenesStatus } from "./BetweenScenes";
 import AssetsLoader, { SceneKeys } from "./AssetsLoader";
-import RPG from "../rpg";
+import RPG from "../gameIndex";
 import AmbientBackgroundScene from "../ambientAssets/backgroundScene";
 import EventsCenter from "../services/EventsCenter";
 

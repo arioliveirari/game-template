@@ -1,5 +1,5 @@
 import { globalState } from "../GlobalDataManager";
-import RPG from "../rpg";
+import RPG from "../gameIndex";
 import EventsCenterManager from "./EventsCenter";
 
 export default class ToolTips {

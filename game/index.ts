@@ -3,6 +3,7 @@ import BetweenScenes from "./Loader/BetweenScenes";
 import GlobalDataManager from "./GlobalDataManager";
 
 import { NONE } from "phaser";
+import GameScene from "./gameIndex";
 
 export default class Game {
   game?: Phaser.Game;
@@ -36,16 +37,15 @@ export default class Game {
   };
 
   constructor(canvas: HTMLCanvasElement, maps: string[]) {
-    const globalData = new GlobalDataManager();
-    const multiScene = new MultiScene()
-    const gameBetweenScenes = new BetweenScenes();
+    const game = new GameScene();
+    const dataManagerGlobalmanager = new GlobalDataManager();
     this.config.canvas = canvas;
-    this.config.scene = [multiScene, gameBetweenScenes, globalData];
+    this.config.scene = [game, dataManagerGlobalmanager];
   }
 
   init() {
     const game = new Phaser.Game(this.config);
-    game.scene.start("MultiScene");
+    game.scene.start("GameScene");
     this.game = game;
     return game;
   }

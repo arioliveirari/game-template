@@ -1,5 +1,5 @@
 import { checkIfMobile } from "../helpers/helpers";
-import RPG from "../rpg";
+import RPG from "../gameIndex";
 
 export type GameSelectionItemType = {
   id: string;

@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import PreLoadScene from "./PreLoadScene";
-import RPG from "../rpg";
+import RPG from "../gameIndex";
 // import map from "../maps/room";
 import map from "../maps/City";
 import EventsCenterManager from "../services/EventsCenter";

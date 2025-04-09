@@ -1,13 +1,10 @@
 import Phaser from "phaser";
 import MultiScene from "./Loader/MultiScene";
-import roomMap from "./maps/Room";
-import cityMap from "./maps/City";
 import EventsCenterManager from "./services/EventsCenter";
 import AmbientBackgroundScene from "./ambientAssets/backgroundScene";
 import possibleSounds from "../game/modules/possibleSounds.json";
 import ApiConsumerSingleton from "./services/apiConsume";
 import LocalStorageServiceSingleton from "./services/LocalStorageService";
-import { checkIfMobile } from "./helpers/helpers";
 
 export default class MenuScene extends Phaser.Scene {
   newGameButton?: Phaser.GameObjects.Image;
