@@ -1,0 +1,109 @@
+{
+    "trofies": [
+        {
+            "id": 2,
+            "name": "Hacer una misión",
+            "description": "Terminar una misión es un gran comienzo",
+            "trofyIcon": "copperTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 3,
+            "name": "Hacer 3 misiones",
+            "description": "Termina 3 misiones",
+            "trofyIcon": "silverTrofy",
+            "hadIt": false
+        },
+    {
+            "id": 4,
+            "name": "Hacer 5 misiones",
+            "description": "Termina 5 misiones",
+            "trofyIcon": "goldTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 5,
+            "name": "Gran dormilon",
+            "description": "Gran dormilon",
+            "trofyIcon": "copperTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 6,
+            "name": "Una playa a tu talla",
+            "description": "Desbloqueaste la playa!",
+            "trofyIcon": "goldTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 7,
+            "name": "De la piscina y a la oficina",
+            "description": "Podés trabajar en la oficina!",
+            "trofyIcon": "goldTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 8,
+            "name": "DummyTrofy",
+            "description": "DummyTrofy",
+            "trofyIcon": "silverTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 9,
+            "name": "DummyTrofy",
+            "description": "DummyTrofy",
+            "trofyIcon": "silverTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 10,
+            "name": "DummyTrofy",
+            "description": "DummyTrofy",
+            "trofyIcon": "silverTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 11,
+            "name": "DummyTrofy",
+            "description": "DummyTrofy",
+            "trofyIcon": "silverTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 12,
+            "name": "DummyTrofy",
+            "description": "DummyTrofy",
+            "trofyIcon": "silverTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 13,
+            "name": "DummyTrofy",
+            "description": "DummyTrofy",
+            "trofyIcon": "silverTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 14,
+            "name": "DummyTrofy",
+            "description": "DummyTrofy",
+            "trofyIcon": "silverTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 15,
+            "name": "DummyTrofy",
+            "description": "DummyTrofy",
+            "trofyIcon": "silverTrofy",
+            "hadIt": false
+        },
+        {
+            "id": 16,
+            "name": "DummyTrofy",
+            "description": "DummyTrofy",
+            "trofyIcon": "silverTrofy",
+            "hadIt": false
+        }
+    ]
+}

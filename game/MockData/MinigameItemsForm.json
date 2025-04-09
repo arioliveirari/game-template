@@ -1,0 +1,68 @@
+{
+    "MinigamesItemsForm": [
+        {
+            "id": 1,
+            "title": "Paseo canino III",
+            "questionsIds": [1,2,3],
+            "picture": null,
+            "description": null,
+            "rewardIds": [1,2,3,4]
+        },
+        {
+            "id": 2,
+            "title": "Delivery express III",
+            "questionsIds": [4],
+            "picture": null,
+            "description": null,
+            "rewardIds": [4]
+        },
+        {
+            "id": 3,
+            "title": "Fotografía de primera III",
+            "questionsIds": [5,6,7],
+            "picture": null,
+            "description": null,
+            "rewardIds": [1,9,5,11]
+        },
+        {
+            "id": 4,
+            "title": "Editor Junior III",
+            "questionsIds": [9],
+            "picture": null,
+            "description": null,
+            "rewardIds": [4]
+        },
+        {
+            "id": 5,
+            "title": "Fotos emblemáticas III",
+            "questionsIds": [8],
+            "picture": null,
+            "description": null,
+            "rewardIds": [8]
+        },
+        {
+            "id": 6,
+            "title": "Amigos de cuatro patas",
+            "questionsIds": [10,11,12],
+            "picture": null,
+            "description": null,
+            "rewardIds": [1,14,15,13]
+        },
+        {
+            "id": 7,
+            "title": "CM estrella III",
+            "questionsIds": [13],
+            "picture": null,
+            "description": null,
+            "rewardIds": 18
+        },
+        {
+            "id": 8,
+            "title": "Barista de lujo III",
+            "questionsIds": [14],
+            "picture": null,
+            "description": null,
+            "rewardIds": [18]
+        }
+    ]
+}

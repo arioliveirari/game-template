@@ -1,0 +1,44 @@
+{
+  "name": "experimental-map",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "csvtojson:missions": "npx csvtojson ./csvtojson/missions/missions.csv > ./csvtojson/missions/missions.json && node ./csvtojson/missions/parser.js",
+    "csvtojson:news": "npx csvtojson ./csvtojson/news/news.csv > ./csvtojson/news/news.json && node ./csvtojson/news/parser.js",
+    "test:chatbox": "NODE_OPTIONS=--experimental-vm-modules jest ./sandbox/chatbox --config ./sandbox/chatbox/jest.config.ts",
+    "sandbox:chatbox": "ts-node ./sandbox/chatbox/chatbox.ts"
+  },
+  "dependencies": {
+    "@next/third-parties": "^15.1.5",
+    "axios": "^1.6.0",
+    "mongodb": "^6.13.1",
+    "next": "^14.2.23",
+    "phaser": "^3.88.0",
+    "phaser3-plugin-isometric": "0.0.7",
+    "phaser3-rex-plugins": "^1.80.12",
+    "react": "^18",
+    "react-dom": "^18",
+    "sass": "^1.69.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.8",
+    "@babel/preset-env": "^7.26.8",
+    "@babel/preset-typescript": "^7.26.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "babel": "^6.23.0",
+    "babel-jest": "^29.7.0",
+    "csvtojson": "^2.0.10",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.1",
+    "fs": "^0.0.1-security",
+    "jest": "^29.7.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  }
+}

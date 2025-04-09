@@ -1,0 +1,43 @@
+{
+    "ConfigMinigamesScene": [
+        {
+            "id": 1,
+            "miniGameName": "CoffeMiniGameScene"
+        },
+        {
+            "id": 2,
+            "miniGameName": "FocusMiniGameScene"
+        },
+        {
+            "id": 3,
+            "miniGameName": "CleanTableMiniGameScene"
+        },
+        {
+            "id": 4,
+            "miniGameName": "CaptchaMiniGameScene",
+            "description": ["Selecciona las imágenes para un creador de contenido deportivo.", "Selecciona imágenes para el menú de un restoran.","Selecciona las fotos para el refugio de mascotas."],
+            "size": 2, 
+            "images":[
+                  [
+                    ["captcha_m_1", true],
+                    ["captcha_m_2", false],
+                    ["captcha_m_3", false],
+                    ["captcha_m_4", false]
+                  ],
+                  [
+                    ["captcha_m_5", false],
+                    ["captcha_m_6", true],
+                    ["captcha_m_7", true],
+                    ["captcha_m_8", true]
+                  ],
+                  [
+                    ["captcha_m_9", false],
+                    ["captcha_m_10", true],
+                    ["captcha_m_11", false],
+                    ["captcha_m_12", true]
+                  ]
+            ]
+        }
+       
+    ]
+}

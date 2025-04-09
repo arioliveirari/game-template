@@ -1,0 +1,16 @@
+{
+    "items": [
+        {
+            "id": 159,
+            "name": "Conoce tus cosas",
+            "description": "Completá este formulario para conocer tus cosas.",
+            "imageInAcademy": "cursoTres",
+            "imageInGrid": "cursoTres",
+            "type": "academy",
+            "requirement": [],
+            "reward": [],
+            "isDone": false,
+            "itemIdMatch": 7
+        }
+    ]
+}

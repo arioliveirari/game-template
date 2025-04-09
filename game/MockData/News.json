@@ -1,0 +1,180 @@
+{
+    "news":[
+        {
+            "id": 1,
+            "title": "Gatitos en apuros",
+            "missionId": [19],
+            "image": "gatosApurosNewsF",
+            "time": null,
+            "description": "Tres felinos han desaparecido y se rumorea que deambulan por distintos rincones de la ciudad. Los vecinos están contando con los más valientes para encontrarlos y devolverlos a sus hogares.",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 2,
+            "title": "Plazas relucientes",
+            "missionId": [20],
+            "image": "plazasRelucientesNewsF",
+            "time": null,
+            "description": "Las plazas locales necesitan un retoque. ¡Arma tu equipo de limpieza y deja estos espacios brillando para todos los ciudadanos!",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 3,
+            "title": "¡Nuevos empleos!",
+            "missionId": [21],
+            "image": "newsDefaultImageF",
+            "time": null,
+            "description": "Los negocios locales buscan repartidores expertos para encargos cada vez más desafiantes. Es el momento de demostrar tus habilidades en el delivery express.",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 4,
+            "title": "¡Nuevos empleos!",
+            "missionId": [22],
+            "image": "newsDefaultImageF",
+            "time": null,
+            "description": "Las fotografías marcan tendencias y cada vez más personas contratan estos servicios para sus eventos y productos. Es el momento de demostrar tus habilidades como fotógrafo y conseguir nuevos clientes.",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 5,
+            "title": "¡Nuevos empleos!",
+            "missionId": [23],
+            "image": "newsDefaultImageF",
+            "time": null,
+            "description": "Las plazas vuelven a estar llenas de amigos de cuatro patas corriendo de un lado a otro. Demuestra tus habilidades como paseador aceptando encargos de nuevos clientes.",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 6,
+            "title": "Calles obstruidas",
+            "missionId": [24],
+            "image": "newsDefaultImageF",
+            "time": null,
+            "description": "Las reparaciones en las calles están en marcha. Se pide a los ciudadanos que porfavro tengan eso en cuenta para planificar sus rutas por las ciudad.",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 7,
+            "title": "Amigos de cuatro patas",
+            "missionId": [25],
+            "image": "amigosPatasNewsF",
+            "time": null,
+            "description": "El refugio de animales necesita ayuda para continuar cuidando a los perros callejeros. Las donaciones harán una gran diferencia en la vida de estos compañeros peludos.",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 8,
+            "title": "Arte callejero",
+            "missionId": [34],
+            "image": "newsDefaultImageF",
+            "time": null,
+            "description": "Cada vez más locales pintan murales para atraer clientes. Es el momento de demostrar tus habilidades como fotógrafo, encuéntralos y gana reputación.",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 9,
+            "title": "Lucas busca su dinero",
+            "missionId": [38],
+            "image": "newsDefaultImageF",
+            "time": null,
+            "description": "¡Lucas está en problemas! El día de ayer se le cayó dinero mientras caminaba en la ciudad, necesita ayuda para poder encontrarlo.",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 10,
+            "title": "Nuevas monedas",
+            "missionId": [39],
+            "image": "nuevasMonedasNewsF",
+            "time": null,
+            "description": "Expertos en inversiones están atentos al lanzamiento de una nueva moneda que ha captado el interés de muchos analistas. Algunas personas han decido invertir en la misma, ya que su valor podría dispararse dentro de poco tiempo.",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 11,
+            "title": "¡Patas, arena y diversión!",
+            "missionId": [40],
+            "image": "dogBeachNewsF",
+            "time": null,
+            "description": "¡Una nueva moda! Cada vez más personas contratan fotógrafos para retratar a sus mascotas y el lugar más elegido por todos es la playa.",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 12,
+            "title": "Servicios en aumento",
+            "missionId": [62],
+            "image": "imagenDiarioGenerica",
+            "time": null,
+            "description": "Nuevas tarifas sacuden el comercio local: aumentan los costos de servicios, ¿cómo afectará esto a los ingresos de los negocios?",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 13,
+            "title": "Modas refrescantes",
+            "missionId": [66],
+            "image": "imagenDiarioGenerica",
+            "time": null,
+            "description": "Boom del café 'cold brew' con infusiones exóticas: ¿Están las cafeterías locales listas para sumarse a la ola de sabores innovadores?",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 14,
+            "title": "Temporada de calor",
+            "missionId": [67],
+            "image": "imagenDiarioGenerica",
+            "time": null,
+            "description": "Verano refrescante: Nuevas propuestas con 'iced lattes' de frutas tropicales y 'cold brews' cítricos conquistan los paladares. ¿Cuáles son las combinaciones más innovadoras?",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 15,
+            "title": "Nuevos sabores",
+            "missionId": [68],
+            "image": "imagenDiarioGenerica",
+            "time": null,
+            "description": "La fiebre del 'matcha latte' con leche de avena: ¿Cómo están adaptando las cafeterías sus menús para satisfacer la demanda de opciones veganas y saludables?",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        },
+        {
+            "id": 16,
+            "title": "¡Corte inesperado!",
+            "missionId": [69],
+            "image": "imagenDiarioGenerica",
+            "time": null,
+            "description": "Crisis energética: Cortes de luz inesperados ponen a prueba la resiliencia de los negocios. Descubra qué medidas están tomando para mantener sus puertas abiertas.",
+            "rewardId": null,
+            "requirements": null,
+            "readed": false
+        }
+    ]
+}

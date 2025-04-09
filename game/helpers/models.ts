@@ -1,0 +1,1 @@
+export type PossibleCity = 'ROOM' | 'CITY' | 'BEACH' | "OFFICE" | "ROOMTEST" | "ENTREPRENEURSHIP";
