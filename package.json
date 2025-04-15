@@ -1,28 +1,19 @@
 {
-  "name": "experimental-map",
+  "name": "game-template",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "csvtojson:missions": "npx csvtojson ./csvtojson/missions/missions.csv > ./csvtojson/missions/missions.json && node ./csvtojson/missions/parser.js",
-    "csvtojson:news": "npx csvtojson ./csvtojson/news/news.csv > ./csvtojson/news/news.json && node ./csvtojson/news/parser.js",
-    "test:chatbox": "NODE_OPTIONS=--experimental-vm-modules jest ./sandbox/chatbox --config ./sandbox/chatbox/jest.config.ts",
-    "sandbox:chatbox": "ts-node ./sandbox/chatbox/chatbox.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@next/third-parties": "^15.1.5",
-    "axios": "^1.6.0",
-    "mongodb": "^6.13.1",
     "next": "^14.2.23",
     "phaser": "^3.88.0",
-    "phaser3-plugin-isometric": "0.0.7",
-    "phaser3-rex-plugins": "^1.80.12",
     "react": "^18",
-    "react-dom": "^18",
-    "sass": "^1.69.5"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@babel/core": "^7.26.8",
