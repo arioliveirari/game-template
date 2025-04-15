@@ -27,7 +27,7 @@ export default function Level() {
       }
     }, 1000)
   }
-
+ 
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
       handleOrientationChange()
