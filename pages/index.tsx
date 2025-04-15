@@ -36,7 +36,7 @@ export default function Level() {
       //@ts-ignore
       return () => window.removeEventListener('orientationchange', handleOrientationChange.bind(this))
     }
-  }, [])
+  }, []) 
 
   React.useEffect(() => {
     if (!game && orientation == "landscape") { 
