@@ -1,8 +1,8 @@
 import Phaser from "phaser";
 import BetweenScenes, { BetweenScenesStatus } from "./BetweenScenes";
 import AssetsLoader, { SceneKeys } from "./AssetsLoader";
-import EventsCenter from "../services/eventsServices/EventsCenterService";
-import MenuScene from "../scenes/menuScene/MenuScene";
+import EventsCenter from "../../services/eventsServices/EventsCenterService";
+import MenuScene from "../menuScene/MenuScene";
 
 export default class MultiScene extends Phaser.Scene {
 

@@ -1,9 +1,7 @@
 import Phaser from "phaser";
+import EventsCenterManager from "../../services/eventsServices/EventsCenterService";
+import MenuScene from "../menuScene/MenuScene";
 import PreLoadScene from "./PreLoadScene";
-import EventsCenterManager from "../services/eventsServices/EventsCenterService";
-
-import MenuScene from "../scenes/menuScene/MenuScene";
-import CinematographyHandler from "../scenes/cinematography/CinematographyHandler";
 
 export enum BetweenScenesStatus {
     IDLE,

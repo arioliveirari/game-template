@@ -1,4 +1,4 @@
-import { PossibleScenesTypes } from "../GlobalTypes";
+import { PossibleScenesTypes } from "../../GlobalTypes";
 import MultiScene from "./MultiScene";
 
 export const changeSceneTo = (scene: PossibleScenesTypes, sceneToStart: string, sceneToStop: string, data: any) => {

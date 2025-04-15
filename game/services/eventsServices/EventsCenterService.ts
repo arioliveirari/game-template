@@ -22,7 +22,7 @@ class EventsCenterManager extends Phaser.Events.EventEmitter {
         } else {
             super();   
             this.activeEvents = {};
-            this.possibleEvents = PossibleEvents as { [key: string]: string };
+            this.possibleEvents = PossibleEvents as unknown as { [key: string]: string };
             this.eventsChallengeListener = new EventsChallengeListener(this.emitEvent.bind(this), this.possibleEvents);
 
         }
