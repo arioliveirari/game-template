@@ -1,13 +1,9 @@
 import Phaser from "phaser";
 import PreLoadScene from "./PreLoadScene";
-import RPG from "../gameIndex";
-// import map from "../maps/room";
-import map from "../maps/City";
-import EventsCenterManager from "../services/EventsCenter";
+import EventsCenterManager from "../services/eventsServices/EventsCenterService";
 
-import MenuScene from "../MenuScene";
-import { Events } from "matter";
-import CinematographyHandler from "../Cinematography/CinematographyHandler";
+import MenuScene from "../scenes/menuScene/MenuScene";
+import CinematographyHandler from "../scenes/cinematography/CinematographyHandler";
 
 export enum BetweenScenesStatus {
     IDLE,
@@ -79,19 +75,6 @@ export default class BetweenScenes extends Phaser.Scene {
                                         const menuScene = new MenuScene()
                                         this.scene.add("MenuScene", menuScene, true);
                                         this.scene.bringToTop("BetweenScenes");
-                                    } else if (this.newSceneName == "RPG") {
-                                        this.time.delayedCall(50, () => {
-                                            const rpg = new RPG(this.newSceneWith);
-                                            this.scene.add("RPG", rpg, true)
-                                            this.scene.bringToTop("BetweenScenes");
-                                        }, undefined, this); // delay in ms
-                                    } else if (this.newSceneName == "CinematographyHandler") {
-                                        this.time.delayedCall(50, () => {
-                                            const cinematographyHandler = new CinematographyHandler(this.newSceneWith);
-                                            this.scene.add("CinematographyHandler", cinematographyHandler, true)
-                                            this.scene.bringToTop("BetweenScenes");
-                                        }, undefined, this); // delay in ms
-
                                     }
                                 }
                                 this.turnOff();
@@ -103,14 +86,6 @@ export default class BetweenScenes extends Phaser.Scene {
                         if (this.newSceneName == "MenuScene") {
                             const menuScene = new MenuScene()
                             this.scene.add("MenuScene", menuScene, true);
-                            this.scene.bringToTop("BetweenScenes");
-                        } else if (this.newSceneName == "RPG") {
-                            const rpg = new RPG(this.newSceneWith);
-                            this.scene.add("RPG", rpg, true);
-                            this.scene.bringToTop("BetweenScenes");
-                        } else if (this.newSceneName == "CinematographyHandler") {
-                            const cinematographyHandler = new CinematographyHandler(this.newSceneWith);
-                            this.scene.add("CinematographyHandler", cinematographyHandler, true)
                             this.scene.bringToTop("BetweenScenes");
                         }
                     }
@@ -138,8 +113,6 @@ export default class BetweenScenes extends Phaser.Scene {
             const child = c as Phaser.GameObjects.GameObject;
             this.tweens.add({
                 targets: child,
-                // scale: 0,
-                // angle: 180,
                 alpha: 0,
                 ease: this.ease,
                 duration: this.speed,
@@ -147,7 +120,6 @@ export default class BetweenScenes extends Phaser.Scene {
                 repeat: 0,
                 yoyo: false,
                 hold: 200,
-                //  onCompleteParams: self,
                 onComplete: ii == 107 ? self.finishLogic.bind(self) : () => { },
             });
 
@@ -161,8 +133,6 @@ export default class BetweenScenes extends Phaser.Scene {
     }
 
     onTurnOnComplete() {
-        // check if there is a scene preloadscene
-
         const preloadScene = new PreLoadScene(this.newSceneWith && this.newSceneWith.loadKey ? this.newSceneWith.loadKey : undefined, () => {
             this.loadNewScene()
             this.turnOff()
@@ -177,11 +147,8 @@ export default class BetweenScenes extends Phaser.Scene {
         //@ts-ignore
         this.blocks.children.iterate((c) => {
             const child = c as Phaser.GameObjects.GameObject;
-            const { width, height } = this.cameras.main;
             this.tweens.add({
                 targets: child,
-                // scale: scale,
-                // angle: 180,
                 alpha: 1,
                 ease: this.ease,
                 duration: this.speed,
@@ -193,7 +160,6 @@ export default class BetweenScenes extends Phaser.Scene {
             });
             i++;
             ii++;
-
             if (i % this.wParts === 0) {
                 i = 0;
             }
@@ -202,15 +168,12 @@ export default class BetweenScenes extends Phaser.Scene {
 
     create() {
         this.firstRender = true
-
         this.blocks = this.add.group({
             key: "block",
             repeat: (this.wParts * this.hParts) - 1,
             setScale: { x: 0, y: 0 },
         });
-
         const { width, height } = this.cameras.main;
-
         //@ts-ignore
         this.blocks.getChildren().forEach((child: Phaser.GameObjects.Sprite, i) => {
             child.setOrigin(0.5, 0.5);
@@ -219,7 +182,6 @@ export default class BetweenScenes extends Phaser.Scene {
             child.setAlpha(0);
             child.setTint(0x000000);
         })
-
         Phaser.Actions.GridAlign(this.blocks.getChildren(), {
             width: this.wParts,
             height: this.hParts,

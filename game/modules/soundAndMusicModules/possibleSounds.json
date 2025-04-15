@@ -1,0 +1,10 @@
+{
+    "sounds": {
+        "button": {
+            "buttonClick": "clickButtonSound"
+        }
+    },
+    "musics": {
+        
+    }
+}

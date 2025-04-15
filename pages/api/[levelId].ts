@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import CKApiSingleton from '@/services/ck_api'
 import lvl1json from './lvl1.json'
-import { LevelJSON, TileCreatorParams, Direction, TileType, ObjType } from '@/game/types'
+import { LevelJSON, TileCreatorParams, Direction, TileType, ObjType } from '@/game/GlobalTypes'
 
 type Data = {
   maps?: (string | LevelJSON & any)[],

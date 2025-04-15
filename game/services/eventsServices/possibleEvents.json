@@ -1,0 +1,12 @@
+{
+    "possibleEvents": { 
+        "TEST": "test",
+        "MUSIC_VOLUME_CHANGE": "musicVolumeChange",
+        "SOUND_VOLUME_CHANGE": "soundVolumeChange",
+        "BRIGHTNESS_CHANGE": "brightnessChange",
+        "GENERIC_TROPHY": "genericTrophy",
+        "CHANGE_SCENE": "changeScene",
+        "CHANGE_BACKGROUND_SCENE": "changeBackgroundScene",
+        "CHANGE_FRONTGROUND_SCENE": "changeForegroundScene"
+    }
+}

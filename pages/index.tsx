@@ -3,17 +3,12 @@ import Head from 'next/head'
 import React from 'react'
 import Phaser from 'phaser'
 import Game from '@/game'
-import axios from 'axios';
-import { useRouter } from 'next/router';
 
-// Declara la interfaz global si es necesario
 declare global {
   interface Window { Phaser: typeof Phaser }
 }
 
-// Componente principal Home
 export default function Level() {
-  // Declaración de estados y referencias
   const [_phaser, setPhaser] = React.useState<typeof Phaser>()
   const [GameConstructor, setGameConstructor] = React.useState<Game>()
   const [game, setGame] = React.useState<Phaser.Game>();
@@ -21,11 +16,6 @@ export default function Level() {
   const [maps, setMaps] = React.useState<string[]>();
 
   const [orientation,setOrientation] = React.useState<String | null>(null)
-  
-  // Hook useRouter para acceder a los parámetros de la ruta
-  const router = useRouter();
-  const levelId = 1; // levelId se obtiene de la URL
-  // Efecto para cargar el juego y los mapas
 
   const handleOrientationChange = () => {
     setTimeout(() => {
@@ -48,25 +38,11 @@ export default function Level() {
     }
   }, [])
 
-
   React.useEffect(() => {
-    // if (typeof levelId !== 'number') router.push('/1')
-    if (!game && levelId && orientation == "landscape") { // Solo carga cuando levelId está definido
+    if (!game && orientation == "landscape") { 
       const DynamicPhaser = require('phaser')
       setPhaser(DynamicPhaser)
       setMaps([])
-      // //TODO: SACAR ESTO AHORA SE HACE EN EL BETWEEN SCENE
-      // const axiosInstance = axios.create({
-      //   baseURL: "/",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // });
-      // axiosInstance.get(`/api/${levelId}`).then((res) => { // Hacer una solicitud al servidor para obtener el mapa específico para levelId
-      //   setMaps(res.data.maps)
-      // }).catch(error => {
-      //   console.error('Error fetching maps:', error);
-      // });
     }
   }, [orientation])
 
@@ -91,7 +67,7 @@ export default function Level() {
     <>
       <Head>
         <title>Chambix</title>
-        <meta name="description" content={`Experimental Map - Level ${levelId}`} />
+        <meta name="description" content={``} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon2.png" />
         <link rel="manifest" href="manifest.json" />

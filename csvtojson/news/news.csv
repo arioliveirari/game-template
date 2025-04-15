@@ -1,8 +1,0 @@
-id,title,missionId,image,time,description,rewardId,requirements,readed
-1,Gatitos en apuros,19,imagenDiarioGenerica,NULL,Tres felinos han desaparecido y se rumorea que deambulan por distintos rincones de la ciudad. Los vecinos están contando con los más valientes para encontrarlos y devolverlos a sus hogares.,NULL,NULL,FALSE
-2,Plazas relucientes,20,imagenDiarioGenerica,NULL,Las plazas locales necesitan un retoque. ¡Arma tu equipo de limpieza y deja estos espacios brillando para todos los ciudadanos!,NULL,NULL,FALSE
-3,¡Nuevos empleos!,21,imagenDiarioGenerica,NULL,Los negocios locales buscan repartidores expertos para encargos cada vez más desafiantes. Es el momento de demostrar tus habilidades en el delivery express.,NULL,NULL,FALSE
-4,¡Nuevos empleos!,22,imagenDiarioGenerica,NULL,Las fotografías marcan tendencia y cada vez más personas contratan estos servicios para sus eventos y productos. Es el momento de demostrar tus habilidades como fotógrafo y conseguri nuevos clientes.,NULL,NULL,FALSE
-5,¡Nuevos empleos!,23,imagenDiarioGenerica,NULL,Las plazas vuelven a estar llenas de amigos de cuatro patas corriendo de un lado a otro. Demuestra tus habilidades como paseador aceptando encargos de nuevos clientes.,NULL,NULL,FALSE
-6,Calles obstruidas,24,imagenDiarioGenerica,NULL,Las reparaciones en las calles están en marcha. Se pide a los ciudadanos que porfavro tengan eso en cuenta para planificar sus rutas por las ciudad.,NULL,NULL,FALSE
-7,Amigos de cuatro patas,25,imagenDiarioGenerica,NULL,El refugio de animales necesita ayuda para continuar cuidando a los perros callejeros. Las donaciones harán una gran diferencia en la vida de estos compañeros peludos.,NULL,NULL,FALSE

@@ -1,9 +1,8 @@
 import Phaser from "phaser";
 import BetweenScenes, { BetweenScenesStatus } from "./BetweenScenes";
 import AssetsLoader, { SceneKeys } from "./AssetsLoader";
-import RPG from "../gameIndex";
-import AmbientBackgroundScene from "../ambientAssets/backgroundScene";
-import EventsCenter from "../services/EventsCenter";
+import EventsCenter from "../services/eventsServices/EventsCenterService";
+import MenuScene from "../scenes/menuScene/MenuScene";
 
 export default class MultiScene extends Phaser.Scene {
 
@@ -22,9 +21,6 @@ export default class MultiScene extends Phaser.Scene {
   }
 
   preload(data: any) {
-    this.game.plugins.removeScenePlugin("IsoPlugin");
-    this.game.plugins.removeScenePlugin("IsoPhysics");
-    this.game.plugins.removeScenePlugin("rexUI");
     this.load.image("loadingBlock1", "/images/bloque2TEST.png");
     this.load.image("loadingBlock2", "/images/bloque.png");
     this.load.image("loadingBlock3", "/images/street-a.png");
@@ -37,14 +33,6 @@ export default class MultiScene extends Phaser.Scene {
         this.makeTransition(this.scenekey, this.sceneToStop ?? undefined, this.sceneData ?? undefined);
       } else {
           this.makeTransition("MenuScene", undefined);
-        // this.makeTransition("CinematographyHandler", undefined, "movie1scene1");
-        // this.makeTransition("RPG", undefined, "ENTREPRENEURSHIP");
-        // this.makeTransition("RPG", undefined, "BEACH");
-        //  this.makeTransition("RPG", undefined, "OFFICE");  
-        // this.makeTransition("RPG", undefined, "CITY");
-        // this.makeTransition("RPG", undefined, "TESTCITY");
-        // this.makeTransition("RPG", undefined, "ROOMTEST");
-        // this.makeTransition("RPG", undefined, "ROOM");
       }
     });
   }
@@ -63,8 +51,8 @@ export default class MultiScene extends Phaser.Scene {
         this.scene.remove("MultiScene");
       });
     } else {
-      const rpg = new RPG("ROOM");
-      this.scene.add("RPG", rpg, true);
+      const defaultScene = new MenuScene();
+      this.scene.add("MenuScene", defaultScene, true);
       this.time.delayedCall(1000, () => {
         this.scene.remove("MultiScene");
       });

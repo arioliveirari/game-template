@@ -1,9 +1,5 @@
-import MultiScene from "./Loader/MultiScene";
-import BetweenScenes from "./Loader/BetweenScenes";
-import GlobalDataManager from "./GlobalDataManager";
-
-import { NONE } from "phaser";
-import GameScene from "./gameIndex";
+import GlobalDataManager from "./scenes/globalData/GlobalDataManager";
+import MenuScene from "./scenes/menuScene/MenuScene";
 
 export default class Game {
   game?: Phaser.Game;
@@ -37,7 +33,7 @@ export default class Game {
   };
 
   constructor(canvas: HTMLCanvasElement, maps: string[]) {
-    const game = new GameScene();
+    const game = new MenuScene();
     const dataManagerGlobalmanager = new GlobalDataManager();
     this.config.canvas = canvas;
     this.config.scene = [game, dataManagerGlobalmanager];
