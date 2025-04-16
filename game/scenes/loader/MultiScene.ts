@@ -38,7 +38,7 @@ export default class MultiScene extends Phaser.Scene {
   }
   
   makeTransition(sceneName: string, sceneToStop?: string | undefined, data?: any) {
-    this.eventCenter.emit(this.eventCenter.possibleEvents.CHANGE_SCENE);
+    // this.eventCenter.emit(this.eventCenter.possibleEvents.CHANGE_SCENE);
     const getBetweenScenesScene = this.game.scene.getScene(
       "BetweenScenes"
     ) as BetweenScenes;

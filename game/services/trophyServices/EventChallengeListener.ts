@@ -34,33 +34,33 @@ export class EventsChallengeListener {
         this.possibleEvents = possibleEvents;
 
         this.trofies = [
-            {
-                check: (ec: EventsCenterManagerType, challengeObject: ChallengeObjectType, trophy: PossibleTrophy) => {
-                    if (trophy && trophy.count == 1) {
-                        return {
-                            result: true,
-                            trophyUpdated: { ...trophy, count: trophy.count - 1 } as PossibleTrophy
-                        };
-                    } else {
-                        return {
-                            result: false,
-                            trophyUpdated: { ...trophy, count: (trophy.count || 1) - 1 } as PossibleTrophy
-                        }
-                    }
-                },
-                id: 1,
-                name: "Trofeo de prueba",
-                description: "Este es un trofeo de prueba",
-                reward: { money: 10 },
-                completed: false,
-                trophyIcon: "copperTrophy",
-                type: ChallengeTypes.generic,
-                state: ChallengeStates.pending,
-                count: 1,
-                unblock: (ec: EventsCenterManagerType) => {
+            // {
+            //     check: (ec: EventsCenterManagerType, challengeObject: ChallengeObjectType, trophy: PossibleTrophy) => {
+            //         if (trophy && trophy.count == 1) {
+            //             return {
+            //                 result: true,
+            //                 trophyUpdated: { ...trophy, count: trophy.count - 1 } as PossibleTrophy
+            //             };
+            //         } else {
+            //             return {
+            //                 result: false,
+            //                 trophyUpdated: { ...trophy, count: (trophy.count || 1) - 1 } as PossibleTrophy
+            //             }
+            //         }
+            //     },
+            //     id: 1,
+            //     name: "Trofeo de prueba",
+            //     description: "Este es un trofeo de prueba",
+            //     reward: { money: 10 },
+            //     completed: false,
+            //     trophyIcon: "copperTrophy",
+            //     type: ChallengeTypes.generic,
+            //     state: ChallengeStates.pending,
+            //     count: 1,
+            //     unblock: (ec: EventsCenterManagerType) => {
                     
-                }
-            },
+            //     }
+            // },
         ];
     }
 

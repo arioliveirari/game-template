@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import EventsCenterManager from "../../services/eventsServices/EventsCenterService";
 import MenuScene from "../menuScene/MenuScene";
 import PreLoadScene from "./PreLoadScene";
+import MainScene from "../mainScene/MainScene";
 
 export enum BetweenScenesStatus {
     IDLE,
@@ -20,8 +21,8 @@ export default class BetweenScenes extends Phaser.Scene {
     wParts = 30;
     hParts = 25;
     speed = 600;
-    delayTime= 20;
-    ease= "linear";
+    delayTime = 20;
+    ease = "linear";
 
     constructor() {
         super({ key: "BetweenScenes" });
@@ -73,6 +74,10 @@ export default class BetweenScenes extends Phaser.Scene {
                                         const menuScene = new MenuScene()
                                         this.scene.add("MenuScene", menuScene, true);
                                         this.scene.bringToTop("BetweenScenes");
+                                    } else if (this.newSceneName == "MainScene") {
+                                        const mainScene = new MainScene()
+                                        this.scene.add("MainScene", mainScene, true);
+                                        this.scene.bringToTop("BetweenScenes");
                                     }
                                 }
                                 this.turnOff();
@@ -84,6 +89,10 @@ export default class BetweenScenes extends Phaser.Scene {
                         if (this.newSceneName == "MenuScene") {
                             const menuScene = new MenuScene()
                             this.scene.add("MenuScene", menuScene, true);
+                            this.scene.bringToTop("BetweenScenes");
+                        } else if (this.newSceneName == "MainScene") {
+                            const mainScene = new MainScene()
+                            this.scene.add("MainScene", mainScene, true);
                             this.scene.bringToTop("BetweenScenes");
                         }
                     }

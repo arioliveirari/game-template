@@ -1,5 +1,8 @@
 import GlobalDataManager from "./scenes/globalData/GlobalDataManager";
+import BetweenScenes from "./scenes/loader/BetweenScenes";
+import MainScene from "./scenes/mainScene/MainScene";
 import MenuScene from "./scenes/menuScene/MenuScene";
+import SceneManagerScene from "./scenes/sceneManagerScene/sceneManagerScene";
 
 export default class Game {
   game?: Phaser.Game;
@@ -33,15 +36,17 @@ export default class Game {
   };
 
   constructor(canvas: HTMLCanvasElement, maps: string[]) {
-    const game = new MenuScene();
+    const menuScene = new MenuScene();
+    const sceneManagerScene = new SceneManagerScene();
+    const betweenScenes = new BetweenScenes();
     const dataManagerGlobalmanager = new GlobalDataManager();
     this.config.canvas = canvas;
-    this.config.scene = [game, dataManagerGlobalmanager];
+    this.config.scene = [menuScene, sceneManagerScene, dataManagerGlobalmanager, betweenScenes ];
   }
 
   init() {
     const game = new Phaser.Game(this.config);
-    game.scene.start("GameScene");
+    game.scene.start("MenuScene");
     this.game = game;
     return game;
   }
