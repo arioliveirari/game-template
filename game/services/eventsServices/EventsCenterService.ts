@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { EventsChallengeListener } from "../trophyServices/EventChallengeListener";
-import PossibleEvents from "./PossibleEvents.json";
+import PossibleEvents from "./possibleEvents.json";
 
 export type activeEvents = {
     [key: string]: [string, Function][]
@@ -51,12 +51,7 @@ class EventsCenterManager extends Phaser.Events.EventEmitter {
     }
 
     emitEvent (event: string, data: any) {
-        if(window && window.dataLayer){
-            window.dataLayer.push({
-                event: event,
-                data: data
-            });
-        }
+        
         this.eventsChallengeListener.listener(event, data, this);
         this.emit(event, data);
     }
