@@ -7,6 +7,7 @@
         "GENERIC_TROPHY": "genericTrophy",
         "CHANGE_SCENE": "changeScene",
         "CHANGE_BACKGROUND_SCENE": "changeBackgroundScene",
-        "CHANGE_FRONTGROUND_SCENE": "changeForegroundScene"
+        "CHANGE_FRONTGROUND_SCENE": "changeForegroundScene",
+        "CHANGE_PLAYER_PROPERTIES": "changePlayerProperties"
     }
 }

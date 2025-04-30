@@ -22,7 +22,7 @@ class EventsCenterManager extends Phaser.Events.EventEmitter {
         } else {
             super();   
             this.activeEvents = {};
-            this.possibleEvents = PossibleEvents as unknown as { [key: string]: string };
+            this.possibleEvents = PossibleEvents.possibleEvents as unknown as { [key: string]: string };
             this.eventsChallengeListener = new EventsChallengeListener(this.emitEvent.bind(this), this.possibleEvents);
 
         }
@@ -51,14 +51,15 @@ class EventsCenterManager extends Phaser.Events.EventEmitter {
     }
 
     emitEvent (event: string, data: any) {
-        if(window && window.dataLayer){
-            window.dataLayer.push({
-                event: event,
-                data: data
-            });
-        }
+        // if(window && window.dataLayer){
+        //     window.dataLayer.push({
+        //         event: event,
+        //         data: data
+        //     });
+        // }
         this.eventsChallengeListener.listener(event, data, this);
         this.emit(event, data);
+        console.log("EVENTO EMITIDO NANO", event, data)
     }
 
     emitWithResponse(event: string, data: any): any {

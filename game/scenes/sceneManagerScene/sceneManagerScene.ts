@@ -18,15 +18,15 @@ export default class SceneManagerScene extends Phaser.Scene {
   }
 
   create() {
-    this.eventCenter.turnEventOn(
-      "SceneManagerScene",
-      this.eventCenter.possibleEvents.CHANGE_SCENE,
-      (data: changeSceneType) => {
-        console.log("DATA DE CAMBIO DE ESCENE ARIELITO  ", data)
-        changeSceneTo(this, data.sceneToStart, data.sceneToStop, data.dataToPass);
-      },
-      this
-    );
+    // this.eventCenter.turnEventOn(
+    //   "SceneManagerScene",
+    //   this.eventCenter.possibleEvents.CHANGE_SCENE,
+    //   (data: changeSceneType) => {
+    //     console.log("DATA DE CAMBIO DE ESCENE ARIELITO  ", data)
+    //     changeSceneTo(this, data.sceneToStart, data.sceneToStop, data.dataToPass);
+    //   },
+    //   this
+    // );
   }
 
   update() {

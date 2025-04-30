@@ -29,18 +29,18 @@ export default class GlobalDataManager extends Phaser.Scene {
 
     this.state = this.INITIAL_STATE;
 
-    this.eventCenter.turnEventOn(
-      "GlobalDataManager",
-      this.eventCenter.possibleEvents.CHANGE_SCENE,
-      (data: any) => {
-        console.log(this.state, "PRE CHANGE")
-        this.time.delayedCall(1000, () => {
-          this.state.testSubmodule.changeStateTest();
-          console.log(this.state, "POST CHANGE")
-        }, [], this);
-      },
-      this
-    );
+    // this.eventCenter.turnEventOn(
+    //   "GlobalDataManager",
+    //   this.eventCenter.possibleEvents.CHANGE_SCENE,
+    //   (data: any) => {
+    //     console.log(this.state, "PRE CHANGE")
+    //     this.time.delayedCall(1000, () => {
+    //       this.state.testSubmodule.changeStateTest();
+    //       console.log(this.state, "POST CHANGE")
+    //     }, [], this);
+    //   },
+    //   this
+    // );
 
   }
 

@@ -23,7 +23,7 @@ export default class Game {
     physics: {
       default: "arcade",
       arcade: {
-        gravity: { x: 0, y: 400 },
+        gravity: { x: 0, y: 0 },
         debug: true,
         debugShowBody: true,
         debugShowStaticBody: true,
@@ -36,12 +36,13 @@ export default class Game {
   };
 
   constructor(canvas: HTMLCanvasElement, maps: string[]) {
-    const menuScene = new MenuScene();
+    // const menuScene = new MenuScene();
+    const mainScene = new MainScene();
     const sceneManagerScene = new SceneManagerScene();
     const betweenScenes = new BetweenScenes();
     const dataManagerGlobalmanager = new GlobalDataManager();
     this.config.canvas = canvas;
-    this.config.scene = [menuScene, sceneManagerScene, dataManagerGlobalmanager, betweenScenes ];
+    this.config.scene = [mainScene, sceneManagerScene, dataManagerGlobalmanager, betweenScenes ];
   }
 
   init() {
