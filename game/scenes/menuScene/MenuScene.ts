@@ -54,14 +54,15 @@ export default class MenuScene extends Phaser.Scene {
   testCallback() {
     if(!this.canChange) return
     this.canChange = false;
-    this.eventCenter.emitEvent(
-      this.eventCenter.possibleEvents.CHANGE_SCENE,
-      {
-        sceneToStart: "MainScene",
-        sceneToStop: "MenuScene",
-        dataToPass: { test: "test" }
-      }
-    );
+    this.scene.restart();
+    // this.eventCenter.emitEvent(
+    //   this.eventCenter.possibleEvents.CHANGE_SCENE,
+    //   {
+    //     sceneToStart: "MenuScene",
+    //     sceneToStop: "MenuScene",
+    //     dataToPass: { test: "test" }
+    //   }
+    // );
   }
 
   update() {
