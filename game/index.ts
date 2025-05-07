@@ -1,3 +1,4 @@
+import ConnectorScene from "./scenes/connectorScene/ConnectorScene";
 import GlobalDataManager from "./scenes/globalData/GlobalDataManager";
 import BetweenScenes from "./scenes/loader/BetweenScenes";
 import MainScene from "./scenes/mainScene/MainScene";
@@ -40,13 +41,16 @@ export default class Game {
     const sceneManagerScene = new SceneManagerScene();
     const betweenScenes = new BetweenScenes();
     const dataManagerGlobalmanager = new GlobalDataManager();
+    const connectorScene = new ConnectorScene();
     this.config.canvas = canvas;
-    this.config.scene = [menuScene, sceneManagerScene, dataManagerGlobalmanager, betweenScenes ];
+    // this.config.scene = [menuScene, connectorScene, sceneManagerScene, dataManagerGlobalmanager, betweenScenes ];
+    this.config.scene = [connectorScene, menuScene, sceneManagerScene, dataManagerGlobalmanager, betweenScenes ];
+
   }
 
   init() {
     const game = new Phaser.Game(this.config);
-    game.scene.start("MenuScene");
+    game.scene.start("ConnectorScene");
     this.game = game;
     return game;
   }

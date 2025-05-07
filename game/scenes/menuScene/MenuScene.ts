@@ -20,7 +20,7 @@ export default class MenuScene extends Phaser.Scene {
 
 
   constructor() {
-    super({key: "MenuScene", active: true});
+    super({key: "MenuScene", active: false});
   }
 
   create() {
@@ -130,15 +130,15 @@ export default class MenuScene extends Phaser.Scene {
     if(!this.canChange) return
     this.canChange = false;
     this.difficulty += newDifficulty;
-    this.scene.restart()
-    // this.eventCenter.emitEvent(
-    //   this.eventCenter.possibleEvents.CHANGE_SCENE,
-    //   {
-    //     sceneToStart: "MenuScene",
-    //     sceneToStop: "MenuScene",
-    //     dataToPass: { test: "test" }
-    //   }
-    // );
+    // this.scene.restart()
+    this.eventCenter.emitEvent(
+      this.eventCenter.possibleEvents.CHANGE_SCENE,
+      {
+        sceneToStart: "MainScene",
+        sceneToStop: "MenuScene",
+        dataToPass: { test: "test" }
+      }
+    );
   }
 
   update() {
