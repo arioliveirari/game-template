@@ -8,6 +8,7 @@ export default class ConnectorScene extends Phaser.Scene {
   eventCenter = EventsCenterManager.getInstance();
   draggingBlock: GraphicsBlock | null = null;
   matrix: GraphicsBlock[][] = [];
+  brickMatrix: BlackBrickGraphicsBlock[][] = [];
 
   player: GraphicPlayer | null = null;
 
@@ -16,15 +17,15 @@ export default class ConnectorScene extends Phaser.Scene {
   }
 
   map: number[][] = [
-    [0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,3,0,0,0,0],
-    [0,0,0,0,0,0,0,1,0,0],
+    [9,0,0,0,0,0,0,0,0,0],
+    [0,0,9,0,0,0,0,0,0,0],
+    [0,0,0,0,0,3,8,0,0,0],
+    [0,0,0,9,0,0,0,1,0,0],
     [0,2,0,0,0,0,0,0,2,0],
-    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,9,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0],
     [0,1,0,0,0,3,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,8,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0],
   ];
 
@@ -82,6 +83,8 @@ export default class ConnectorScene extends Phaser.Scene {
         g.draw();
         this.add.existing(g.graphics);
         console.log("BLACK BRICK", g);
+        if(!this.brickMatrix[i]) this.brickMatrix[i] = [];
+        this.brickMatrix[i][j] = g;
       }
     }
   }
@@ -108,8 +111,12 @@ export default class ConnectorScene extends Phaser.Scene {
         return {type: "green", color: 0x00ff00, alpha: 1};
       case 3:
         return {type: "blue", color: 0x0000ff, alpha: 1};
+      case 9:
+        return  {type: "bomb", color: 0x600909, alpha: 1, exclude: true};
+      case 8:
+        return  {type: "lantern", color: 0xd0de26, alpha: 1, exclude: true};
       default:
-        return {type: "empty", color: EMPTYCOLORTYPE, alpha: 1};
+        return {type: "empty", color: EMPTYCOLORTYPE, alpha: 1, exclude: true};
     }
 
   }
@@ -167,6 +174,12 @@ export default class ConnectorScene extends Phaser.Scene {
   blackBrickControls: BlackBrickControlsObj = {
     onClick: (x: number, y: number, obj: BlackBrickGraphicsBlock) => {
       obj.graphics.destroy();
+    },
+    onHover: (x: number, y: number, obj: BlackBrickGraphicsBlock) => {
+      obj.onHover(x,y,obj)
+    },
+    onHoverOut: (x: number, y: number, obj: BlackBrickGraphicsBlock) => {
+      obj.onHoverOut(x,y,obj)
     }
   }
 
@@ -188,8 +201,25 @@ export default class ConnectorScene extends Phaser.Scene {
     },
     onStopClick: (x: number, y: number, obj: GraphicsBlock) => {
       console.log("STOP CLICKED", x, y, obj);
-      this.draggingBlock = null;
-      this.checkIfWin();
+
+      if(obj.config.type == "lantern") {
+        console.log("LANTERN CLICKED", x, y, obj);
+        const matrixColor = this.matrix.map((row) => row.map((block) => 1));
+        const n = this.getNearByBlocks(obj.x, obj.y, matrixColor)
+
+        console.log("NEIGHBORS", n, matrixColor);
+        for(let i = 0; i < n.length; i++){
+          const blockObj = this.brickMatrix[n[i][1]][n[i][0]];
+          console.log("BLOCK OBJ", blockObj);
+          //Remove black Mask on this position
+          blockObj.graphics.destroy();
+        }
+        return
+      }
+      if(!this.checkIfLose(obj)) {
+        this.draggingBlock = null;
+        this.checkIfWin();
+      }
     },
     onMove: (x: number, y: number, obj: GraphicsBlock) => {
       if(this.draggingBlock) {
@@ -244,6 +274,30 @@ export default class ConnectorScene extends Phaser.Scene {
     }
     return true;
   }
+  getNearByBlocks(x: number, y: number, matrix: number[][]) {
+    const neighbors = [];
+    const directions = [
+      [0, 1], // right
+      [1,1], // down right
+      [1, 0], // down
+      [1, -1], // down left
+      [0, -1], // left
+      [-1, -1], // up left
+      [-1, 0], // up
+      [-1, 1] // up right
+    ];
+    for(let i = 0; i < directions.length; i++){
+      const [dx, dy] = directions[i];
+      const nx = x + dx;
+      const ny = y + dy;
+      console.log("NEIGHBOR", nx, ny);
+      if(nx >= 0 && nx < matrix[0].length && ny >= 0 && ny < matrix.length && matrix[ny][nx] === 1){
+        neighbors.push([nx, ny]);
+      }
+    }
+    return neighbors;
+  }
+
 
   getNeighbors(x: number, y: number, matrix: number[][]) {
     const neighbors = [];
@@ -266,10 +320,30 @@ export default class ConnectorScene extends Phaser.Scene {
     return neighbors;
   }
   
+  checkIfLose(obj: GraphicsBlock) {
+    // check if the block is a bomb
+    if(obj.config.type === "bomb") {
+      console.log("YOU LOSE");
+      // restart scene
+      this.scene.restart();
+      return true
+    } else 
+    return false;
+  }
+
   checkIfWin(){
     const colors = this.matrix.map((row) => row.map((block) => block.config.type));
     //@ts-ignore
-    const uniqueColors = [...new Set(colors.flat())];
+    let uniqueColors = [...new Set(colors.flat())];
+
+    // remove color where their config has exclude true
+    uniqueColors = uniqueColors.filter((color) => {
+      const block = this.matrix.flat().find((block) => block.config.type === color);
+      if(block) {
+        return !block.config.exclude;
+      }
+      return true;
+    });
 
     // beside empty, check if all colors are connected
     for(let i = 0; i < uniqueColors.length; i++){
@@ -351,6 +425,51 @@ class GraphicsBlock {
   draw() {
     const xPos = this.x * this.size;
     const yPos = this.y * this.size;
+
+     // if config.type is equal to current type, clean
+     if(this.config.type === "lantern") {
+      this.graphics.clear();
+      this.graphics.fillStyle(this.config.color, 1);
+      this.graphics.fillRect(this.x * this.size, this.y * this.size, this.size, this.size);
+      this.graphics.lineStyle(1, 0x000000, 1);
+      this.graphics.strokeRect(this.x * this.size, this.y * this.size, this.size, this.size);
+      this.graphics.setAlpha(1);
+      this.graphics.setVisible(true);
+      this.graphics.setInteractive(new Phaser.Geom.Rectangle(
+        this.x * this.size,
+        this.y * this.size,
+        this.size,
+        this.size
+      ), Phaser.Geom.Rectangle.Contains);
+      // Draw a triangle
+     
+      this.graphics.on('pointerup', (pointer: Phaser.Input.Pointer) => {
+        this.controls.onStopClick(pointer.x, pointer.y, this);
+      });
+     }
+     
+     if(this.config.type == "bomb") {
+      this.graphics.clear();
+      this.graphics.fillStyle(this.config.color, 1);
+      this.graphics.fillRect(this.x * this.size, this.y * this.size, this.size, this.size);
+      this.graphics.lineStyle(1, 0x000000, 1);
+      this.graphics.strokeRect(this.x * this.size, this.y * this.size, this.size, this.size);
+      this.graphics.setAlpha(1);
+      this.graphics.setVisible(true);
+      this.graphics.setInteractive(new Phaser.Geom.Rectangle(
+        this.x * this.size,
+        this.y * this.size,
+        this.size,
+        this.size
+      ), Phaser.Geom.Rectangle.Contains);
+      // Draw a triangle
+     
+      this.graphics.on('pointerup', (pointer: Phaser.Input.Pointer) => {
+        this.controls.onStopClick(pointer.x, pointer.y, this);
+      });
+      return
+    }
+
     if(this.config.type !== "empty") this.canBeCleared = false;
     this.graphics.fillStyle(this.config.color, 1);
     this.graphics.fillRect(xPos, yPos, this.size, this.size);
@@ -382,7 +501,8 @@ class GraphicsBlock {
     });
    
   }
-
+  
+  
   onHover(){
     // change color
     this.graphics.clear();
@@ -403,7 +523,9 @@ class GraphicsBlock {
   
   // Create Drag Controls, the idea is to drag the block (not 0 or empty) and colored alll blocks while the drag continues, dont change the color of other blocks colors
   changeConfig(config: GraphicsBlockConfig) {
-    // if config.type is equal to current type, clean
+    
+    
+
     if(this.canBeCleared && this.config.type === config.type) {
       this.graphics.clear();
       this.graphics.fillStyle(EMPTYCOLORTYPE, 1);
@@ -439,11 +561,14 @@ export type GraphicsBlockConfig = {
   type: string;
   color: number;
   alpha: number;
+  exclude?: boolean;
 }
 
 
 export type BlackBrickControlsObj = {
   onClick: (x:number,y:number, obj:BlackBrickGraphicsBlock) => void;
+  onHover: (x:number,y:number, obj:BlackBrickGraphicsBlock) => void;
+  onHoverOut: (x:number,y:number, obj:BlackBrickGraphicsBlock) => void;
 }
 
 export class GraphicPlayer {
@@ -531,8 +656,6 @@ export class GraphicPlayer {
   }
 }  
  
-
-
 class BlackBrickGraphicsBlock {
   x: number;
   y: number;
@@ -550,6 +673,26 @@ class BlackBrickGraphicsBlock {
     this.config = {type: "black", color: 0x000000, alpha: 1};
   }
 
+  onHover(x: number, y: number, obj: BlackBrickGraphicsBlock) {
+    this.graphics.clear();
+    // this.graphics.fillStyle(this.config.color, 0.1); // Modo Debug
+    this.graphics.fillStyle(0x0d0d0d, 1);
+    this.graphics.fillRect(this.x * this.size, this.y * this.size, this.size, this.size);
+    this.graphics.lineStyle(1, 0x000000, 1);
+    this.graphics.strokeRect(this.x * this.size, this.y * this.size, this.size, this.size);
+
+  }
+  onHoverOut(x: number, y: number, obj: BlackBrickGraphicsBlock) {
+    // revert
+    this.graphics.clear();
+    // this.graphics.fillStyle(this.config.color, 1); // Modo Debug
+    this.graphics.fillStyle(this.config.color, 1);
+    this.graphics.fillRect(this.x * this.size, this.y * this.size, this.size, this.size);
+    this.graphics.lineStyle(1, 0x000000, 1);
+    this.graphics.strokeRect(this.x * this.size, this.y * this.size, this.size, this.size); 
+    
+  }
+
   draw() {
     const xPos = this.x * this.size;
     const yPos = this.y * this.size;
@@ -565,8 +708,17 @@ class BlackBrickGraphicsBlock {
       this.size,
       this.size
     ), Phaser.Geom.Rectangle.Contains);
+
     this.graphics.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
       this.controls.onClick(pointer.x, pointer.y, this);
+    });
+
+    this.graphics.on('pointerover', (pointer: Phaser.Input.Pointer) => {
+      this.controls.onHover(pointer.x, pointer.y, this);
+    });
+
+    this.graphics.on('pointerout', (pointer: Phaser.Input.Pointer) => {
+      this.controls.onHoverOut(pointer.x, pointer.y, this);
     });
   }
 }
