@@ -45,7 +45,7 @@ export default class BlackBrickGraphicsBlock {
       this.graphics.fillRect(xPos, yPos, this.size, this.size);
       this.graphics.lineStyle(1, 0x000000, 1);
       this.graphics.strokeRect(xPos, yPos, this.size, this.size);
-      this.graphics.setAlpha(1);
+      this.graphics.setAlpha(0.2);
       this.graphics.setVisible(true);
       this.graphics.setInteractive(new Phaser.Geom.Rectangle(
         xPos,

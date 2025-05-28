@@ -6,40 +6,50 @@ export type activeEvents = {
     [key: string]: [string, Function][]
 };
 
-
+export enum PossibleEventsEnum {
+    TEST,
+    GET_STATE,
+    MUSIC_VOLUME_CHANGE,
+    SOUND_VOLUME_CHANGE,
+    BRIGHTNESS_CHANGE,
+    GENERIC_TROPHY,
+    CHANGE_SCENE,
+    CHANGE_BACKGROUND_SCENE,
+    CHANGE_FRONTGROUND_SCENE,
+}
 export interface globalType {
     eventsCenterInstance?: EventsCenterManager,
-  }
+}
 
 export type EventsCenterManagerType = EventsCenterManager;
 class EventsCenterManager extends Phaser.Events.EventEmitter {
     activeEvents: activeEvents;
     eventsChallengeListener: EventsChallengeListener
-    possibleEvents:{ [key: string]: string};
+    possibleEvents: { [key: string]: string };
     constructor() {
         if ((global as globalType).eventsCenterInstance) {
             throw new Error('New instance cannot be created!!')
         } else {
-            super();   
+            super();
             this.activeEvents = {};
-            this.possibleEvents = PossibleEvents as unknown as { [key: string]: string };
+            this.possibleEvents = PossibleEvents as unknown as { [K in keyof typeof PossibleEventsEnum]: string };
             this.eventsChallengeListener = new EventsChallengeListener(this.emitEvent.bind(this), this.possibleEvents);
 
         }
         (global as globalType).eventsCenterInstance = this
     }
-    
+
     getInstance(): this {
         return this
     }
 
-    turnEventOn (sceneKey:string, event: string, callback: Function, context: any) {
+    turnEventOn(sceneKey: string, event: string, callback: Function, context: any) {
         this.activeEvents[sceneKey as keyof activeEvents] = this.activeEvents[sceneKey as keyof activeEvents] || []
         this.activeEvents[sceneKey as keyof activeEvents].push([event, callback])
         this.on(event, callback, context);
     }
 
-    turnEventOff (sceneKey:string, event: string, context: any) {
+    turnEventOff(sceneKey: string, event: string, context: any) {
         this.activeEvents[sceneKey as keyof activeEvents] = this.activeEvents[sceneKey as keyof activeEvents] || []
         this.activeEvents[sceneKey as keyof activeEvents] = this.activeEvents[sceneKey as keyof activeEvents].filter(([e, cb]) => {
             if (e === event) {
@@ -50,8 +60,8 @@ class EventsCenterManager extends Phaser.Events.EventEmitter {
         })
     }
 
-    emitEvent (event: string, data: any) {
-        
+    emitEvent(event: string, data: any) {
+
         this.eventsChallengeListener.listener(event, data, this);
         this.emit(event, data);
     }
@@ -62,11 +72,11 @@ class EventsCenterManager extends Phaser.Events.EventEmitter {
         if (listeners.length > 1) {
             console.warn(`Event "${event}" has multiple listeners; only the first response will be used.`);
         }
-    
+
         return listeners[0](data);
     }
 
-    turnOffAllEventsByScene (sceneKey: string)  {
+    turnOffAllEventsByScene(sceneKey: string) {
         this.activeEvents[sceneKey as keyof activeEvents] = this.activeEvents[sceneKey as keyof activeEvents] || []
         this.activeEvents[sceneKey as keyof activeEvents].forEach(([event, callback]) => {
             this.off(event, callback);
