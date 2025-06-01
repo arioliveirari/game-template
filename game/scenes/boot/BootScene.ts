@@ -97,9 +97,9 @@ export class BootScene extends BaseScene {
             this.assetManager.loadAssetManifest(assetManifest);
         }
         
-        // Transition to the preload scene
+        // Transition to the menu scene
         this.fadeOutScene(500).then(() => {
-            this.scene.start('PreloadScene');
+            this.scene.start('MenuScene');
         });
     }
 

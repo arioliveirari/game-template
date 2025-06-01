@@ -3,6 +3,7 @@ import { GameConfig } from './types';
 export const GAME_CONFIG: GameConfig = {
     // Game Settings
     title: 'Game Template',
+    description: 'Game Template description',   
     version: '1.0.0',
     width: 1280,
     height: 720,
@@ -12,7 +13,7 @@ export const GAME_CONFIG: GameConfig = {
         default: 'arcade',
         arcade: {
             gravity: { y: 300 },
-            debug: false
+            debug: true
         }
     },
     

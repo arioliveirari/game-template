@@ -1,5 +1,6 @@
 export interface GameConfig {
     title: string;
+    description: string;
     version: string;
     width: number;
     height: number;

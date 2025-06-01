@@ -3,6 +3,7 @@ import Head from 'next/head'
 import React from 'react'
 import Phaser from 'phaser'
 import Game from '@/game'
+import { GAME_CONFIG } from '@/game/config/game'
 
 declare global {
   interface Window { Phaser: typeof Phaser }
@@ -13,13 +14,11 @@ export default function Level() {
   const [GameConstructor, setGameConstructor] = React.useState<Game>()
   const [game, setGame] = React.useState<Phaser.Game>();
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  const [maps, setMaps] = React.useState<string[]>();
 
   const [orientation,setOrientation] = React.useState<String | null>(null)
 
   const handleOrientationChange = () => {
     setTimeout(() => {
-
       if (window.innerHeight > window.innerWidth) {
           setOrientation('portrait')
       } else {
@@ -42,19 +41,18 @@ export default function Level() {
     if (!game && orientation == "landscape") { 
       const DynamicPhaser = require('phaser')
       setPhaser(DynamicPhaser)
-      setMaps([])
     }
   }, [orientation])
 
   // Efecto para inicializar el juego cuando se cargan los mapas
   React.useEffect(() => {
-    if (canvasRef.current && maps) {
+    if (canvasRef.current) {
       // Use dynamic import to avoid SSR issues
       const DynamicGame = require('@/game').default;
       // Pass the canvas to the game constructor
-      setGameConstructor(new DynamicGame(canvasRef.current, maps))
+      setGameConstructor(new DynamicGame(canvasRef.current))
     }
-  }, [canvasRef, maps])
+  }, [canvasRef])
 
   // Efecto para iniciar el juego cuando Phaser y GameConstructor están disponibles
   React.useEffect(() => {
@@ -67,8 +65,8 @@ export default function Level() {
   return (
     <>
       <Head>
-        <title>Chambix</title>
-        <meta name="description" content={``} />
+        <title>{GAME_CONFIG.title}</title>
+        <meta name="description" content={GAME_CONFIG.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon2.png" />
         {/* <link rel="manifest" href="manifest.json" /> */}

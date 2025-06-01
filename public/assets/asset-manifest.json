@@ -2,17 +2,31 @@
   "images": [
     {
       "key": "logo",
-      "url": "logo.png",
+      "url": "ui/logo.png",
       "type": "image"
     },
     {
       "key": "loading-bar-bg",
-      "url": "loading-bar-bg.png",
+      "url": "ui/loading-bar-bg.png",
+      "type": "image"
+    },
+    {
+      "key": "button-bg",
+      "url": "ui/button-bg.png",
       "type": "image"
     }
   ],
   "audio": [],
-  "spritesheets": [],
+  "spritesheets": [
+    {
+      "key": "dude",
+      "url": "sprites/player/dude.png",
+      "frameConfig": {
+        "frameWidth": 32,
+        "frameHeight": 48
+      }
+    }
+  ],
   "atlas": [],
   "json": []
 }

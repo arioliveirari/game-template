@@ -2,6 +2,9 @@ import { GameTemplate } from './core/game';
 import { GAME_CONFIG } from './config/game';
 import { SceneRegistry } from './core/sceneRegistry';
 import { BootScene } from './scenes/boot/BootScene';
+import { MenuScene } from './scenes/menu/MenuScene';
+import { MainScene } from './scenes/main/MainScene';
+import { PlayerExample } from './scenes/examples/PlayerExample';
 
 /**
  * Main Game class that serves as the entry point for the game
@@ -39,7 +42,7 @@ export default class Game {
         }
       },
       backgroundColor: '#000000',
-      scene: [BootScene]
+      scene: [BootScene] // Only include BootScene here
     };
     
     // Create the game instance
@@ -53,10 +56,17 @@ export default class Game {
    * Initialize the game
    * @returns The Phaser game instance
    */
-  init() {
+  init(): GameTemplate {
     if (!this.game) {
       throw new Error('Game not initialized');
     }
+    
+    // Register scenes after game initialization to avoid duplicate scene registration
+    this.sceneRegistry.registerMany([
+      { key: 'MenuScene', scene: MenuScene },
+      { key: 'MainScene', scene: MainScene },
+      { key: 'PlayerExample', scene: PlayerExample }
+    ]);
     
     // Start the boot scene
     this.game.scene.start('BootScene');

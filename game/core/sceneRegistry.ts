@@ -54,11 +54,24 @@ export class SceneRegistry {
      * @param sceneData Scene registration data
      */
     public register(sceneData: SceneRegistration): void {
+        // Check if scene is already registered
+        if (this.scenes.has(sceneData.key)) {
+            console.log(`Scene ${sceneData.key} is already registered. Skipping registration.`);
+            return;
+        }
+        
         this.scenes.set(sceneData.key, sceneData);
         
         // Add to game if game instance exists
         if (this.game) {
-            this.game.scene.add(sceneData.key, sceneData.scene, sceneData.active || false, sceneData.data);
+            try {
+                this.game.scene.add(sceneData.key, sceneData.scene, sceneData.active || false, sceneData.data);
+            } catch (error) {
+                console.warn(`Failed to add scene ${sceneData.key} to game:`, error);
+                // Remove from our registry if adding to Phaser failed
+                this.scenes.delete(sceneData.key);
+                return;
+            }
         }
         
         this.eventSystem.emit('scene-registered', sceneData.key);
