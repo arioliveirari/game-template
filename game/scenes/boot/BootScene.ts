@@ -25,19 +25,47 @@ export class BootScene extends BaseScene {
     protected initialize(): void {
         // Set up the asset manager with this scene
         this.assetManager.setScene(this);
-        
-        // Register for events
-        this.eventSystem.on('assets-loaded', this.onAssetsLoaded, this);
     }
 
     protected preloadScene(): void {
-        // Load minimal assets needed for loading screen
+        // Create fallback assets in memory if they don't exist
+        this.createFallbackAssets();
+        
+        // Load minimal assets needed for boot
         this.load.image('logo', 'assets/logo.png');
-        this.load.image('loading-bar', 'assets/loading-bar.png');
         this.load.image('loading-bar-bg', 'assets/loading-bar-bg.png');
         
-        // Load essential configuration files
+        // Load asset manifest
         this.load.json('asset-manifest', 'assets/asset-manifest.json');
+        
+        // Register event for when assets are loaded
+        this.eventSystem.on('assets-loaded', this.onAssetsLoaded, this);
+    }
+    
+    /**
+     * Create fallback assets in memory if files don't exist
+     * This prevents errors during initial loading
+     */
+    private createFallbackAssets(): void {
+        // Create a simple logo texture if the file doesn't exist
+        if (!this.textures.exists('logo')) {
+            const graphics = this.make.graphics({ x: 0, y: 0 });
+            graphics.fillStyle(0x3498db, 1);
+            graphics.fillRect(0, 0, 200, 100);
+            graphics.fillStyle(0xffffff, 1);
+            graphics.fillRect(20, 20, 160, 60);
+            graphics.generateTexture('logo', 200, 100);
+            graphics.destroy();
+        }
+        
+        // Create a loading bar background texture if the file doesn't exist
+        if (!this.textures.exists('loading-bar-bg')) {
+            const graphics = this.make.graphics({ x: 0, y: 0 });
+            graphics.fillStyle(0x222222, 1);
+            graphics.fillRect(0, 0, 400, 40);
+            graphics.generateTexture('loading-bar-bg', 400, 40);
+            graphics.destroy();
+        }
     }
 
     protected createScene(): void {

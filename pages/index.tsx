@@ -49,9 +49,10 @@ export default function Level() {
   // Efecto para inicializar el juego cuando se cargan los mapas
   React.useEffect(() => {
     if (canvasRef.current && maps) {
-      const DynamicGame = require('@/game')
-      const G = DynamicGame.default as typeof Game
-      setGameConstructor(new G(canvasRef.current, maps))
+      // Use dynamic import to avoid SSR issues
+      const DynamicGame = require('@/game').default;
+      // Pass the canvas to the game constructor
+      setGameConstructor(new DynamicGame(canvasRef.current, maps))
     }
   }, [canvasRef, maps])
 

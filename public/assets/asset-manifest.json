@@ -1,0 +1,18 @@
+{
+  "images": [
+    {
+      "key": "logo",
+      "url": "logo.png",
+      "type": "image"
+    },
+    {
+      "key": "loading-bar-bg",
+      "url": "loading-bar-bg.png",
+      "type": "image"
+    }
+  ],
+  "audio": [],
+  "spritesheets": [],
+  "atlas": [],
+  "json": []
+}

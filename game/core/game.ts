@@ -2,9 +2,10 @@ import Phaser from 'phaser';
 import { GAME_CONFIG } from '../config/game';
 
 export class GameTemplate extends Phaser.Game {
-    constructor() {
-        const config: Phaser.Types.Core.GameConfig = {
-            type: Phaser.AUTO,
+    constructor(config?: Phaser.Types.Core.GameConfig) {
+        // Use provided config or create default config
+        const gameConfig: Phaser.Types.Core.GameConfig = config || {
+            type: Phaser.CANVAS, // Explicitly use CANVAS for Next.js compatibility
             width: GAME_CONFIG.width,
             height: GAME_CONFIG.height,
             physics: {
@@ -23,7 +24,7 @@ export class GameTemplate extends Phaser.Game {
             parent: 'game-container'
         };
 
-        super(config);
+        super(gameConfig);
     }
 
     // Add scene to the game
