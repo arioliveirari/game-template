@@ -11,6 +11,7 @@ export interface PlayerConfig {
   frame?: string | number;
   spritesheet?: {
     key: string;
+    mirrorFrames?: boolean; // If true, use the same frames for left/right but flip the sprite
     animations?: {
       left?: {
         frames?: number[] | { start: number; end: number };
@@ -66,7 +67,7 @@ export class Player {
     }
     
     // Set up physics properties
-    this.sprite.setBounce(0.2);
+    // this.sprite.setBounce(0.2);
     this.sprite.setCollideWorldBounds(true);
     
     // Set up controls
@@ -101,33 +102,63 @@ export class Player {
     const anims = this.scene.anims;
     const key = spritesheet.key;
     
-    // Create left animation
-    if (spritesheet.animations?.left) {
-      const left = spritesheet.animations.left;
-      anims.create({
-        key: 'player-left',
-        frames: typeof left.frames === 'object' && 'start' in left.frames 
-          ? anims.generateFrameNumbers(key, left.frames)
-          : anims.generateFrameNumbers(key, { frames: left.frames as number[] }),
-        frameRate: left.frameRate || 10,
-        repeat: left.repeat !== undefined ? left.repeat : -1
-      });
+    // If using mirrored frames, we only need to create the right animation
+    // since we'll flip the sprite for left movement
+    if (spritesheet.mirrorFrames) {
+      // Only create right animation if it exists
+      if (spritesheet.animations?.right) {
+        const right = spritesheet.animations.right;
+        anims.create({
+          key: 'player-right',
+          frames: typeof right.frames === 'object' && 'start' in right.frames 
+            ? anims.generateFrameNumbers(key, right.frames)
+            : anims.generateFrameNumbers(key, { frames: right.frames as number[] }),
+          frameRate: right.frameRate || 10,
+          repeat: right.repeat !== undefined ? right.repeat : -1
+        });
+      }
+      // If no right animation but left exists, use left frames for both directions
+      else if (spritesheet.animations?.left) {
+        const left = spritesheet.animations.left;
+        anims.create({
+          key: 'player-right',
+          frames: typeof left.frames === 'object' && 'start' in left.frames 
+            ? anims.generateFrameNumbers(key, left.frames)
+            : anims.generateFrameNumbers(key, { frames: left.frames as number[] }),
+          frameRate: left.frameRate || 10,
+          repeat: left.repeat !== undefined ? left.repeat : -1
+        });
+      }
+    } else {
+      // Standard mode - create separate animations for left and right
+      // Create left animation
+      if (spritesheet.animations?.left) {
+        const left = spritesheet.animations.left;
+        anims.create({
+          key: 'player-left',
+          frames: typeof left.frames === 'object' && 'start' in left.frames 
+            ? anims.generateFrameNumbers(key, left.frames)
+            : anims.generateFrameNumbers(key, { frames: left.frames as number[] }),
+          frameRate: left.frameRate || 10,
+          repeat: left.repeat !== undefined ? left.repeat : -1
+        });
+      }
+      
+      // Create right animation
+      if (spritesheet.animations?.right) {
+        const right = spritesheet.animations.right;
+        anims.create({
+          key: 'player-right',
+          frames: typeof right.frames === 'object' && 'start' in right.frames 
+            ? anims.generateFrameNumbers(key, right.frames)
+            : anims.generateFrameNumbers(key, { frames: right.frames as number[] }),
+          frameRate: right.frameRate || 10,
+          repeat: right.repeat !== undefined ? right.repeat : -1
+        });
+      }
     }
     
-    // Create right animation
-    if (spritesheet.animations?.right) {
-      const right = spritesheet.animations.right;
-      anims.create({
-        key: 'player-right',
-        frames: typeof right.frames === 'object' && 'start' in right.frames 
-          ? anims.generateFrameNumbers(key, right.frames)
-          : anims.generateFrameNumbers(key, { frames: right.frames as number[] }),
-        frameRate: right.frameRate || 10,
-        repeat: right.repeat !== undefined ? right.repeat : -1
-      });
-    }
-    
-    // Create idle animation
+    // Create idle animation (same for both modes)
     if (spritesheet.animations?.idle) {
       const idle = spritesheet.animations.idle;
       if (typeof idle.frames === 'number') {
@@ -157,12 +188,22 @@ export class Player {
     // Handle left/right movement
     if (this.cursors && this.cursors.left && this.cursors.left.isDown) {
       this.sprite.setVelocityX(-160);
-      if (this.config.spritesheet?.animations?.left) {
+      
+      // If using mirrored frames, flip the sprite and use the same animation
+      if (this.config.spritesheet?.mirrorFrames) {
+        this.sprite.setFlipX(true);
+        this.sprite.anims.play('player-right', true);
+      } else if (this.config.spritesheet?.animations?.left) {
         this.sprite.anims.play('player-left', true);
       }
     } else if (this.cursors && this.cursors.right && this.cursors.right.isDown) {
       this.sprite.setVelocityX(160);
-      if (this.config.spritesheet?.animations?.right) {
+      
+      // If using mirrored frames, ensure sprite is not flipped
+      if (this.config.spritesheet?.mirrorFrames) {
+        this.sprite.setFlipX(false);
+        this.sprite.anims.play('player-right', true);
+      } else if (this.config.spritesheet?.animations?.right) {
         this.sprite.anims.play('player-right', true);
       }
     } else {

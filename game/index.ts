@@ -2,9 +2,11 @@ import { GameTemplate } from './core/game';
 import { GAME_CONFIG } from './config/game';
 import { SceneRegistry } from './core/sceneRegistry';
 import { BootScene } from './scenes/boot/BootScene';
+// PreloadScene is loaded by the BootScene
 import { MenuScene } from './scenes/menu/MenuScene';
 import { MainScene } from './scenes/main/MainScene';
 import { PlayerExample } from './scenes/examples/PlayerExample';
+import { GameOverScene } from './scenes/examples/GameOverScene';
 
 /**
  * Main Game class that serves as the entry point for the game
@@ -42,7 +44,8 @@ export default class Game {
         }
       },
       backgroundColor: '#000000',
-      scene: [BootScene] // Only include BootScene here
+      scene: [BootScene], // Only include BootScene here
+        
     };
     
     // Create the game instance
@@ -65,7 +68,8 @@ export default class Game {
     this.sceneRegistry.registerMany([
       { key: 'MenuScene', scene: MenuScene },
       { key: 'MainScene', scene: MainScene },
-      { key: 'PlayerExample', scene: PlayerExample }
+      { key: 'PlayerExample', scene: PlayerExample },
+      { key: 'GameOverScene', scene: GameOverScene }
     ]);
     
     // Start the boot scene

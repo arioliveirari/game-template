@@ -31,7 +31,7 @@ export const GAME_CONFIG: GameConfig = {
     // Scene Settings
     scenes: {
         initial: 'Boot',
-        order: ['Boot', 'Preload', 'Menu', 'Game'],
+        order: ['Boot', 'Preload', 'Menu', 'Game', 'GameOverScene'],
         transitions: {
             duration: 500,
             effects: ['fade', 'slide']
