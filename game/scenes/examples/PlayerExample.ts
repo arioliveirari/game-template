@@ -101,7 +101,7 @@ export class PlayerExample extends BaseScene {
     
     // Create player with spritesheet animations on the right side
     this.playerWithSprite = new Player({
-      scene: this,
+      scene: this, 
       x: 600,
       y: 450,
       texture: 'player-example-dude',
