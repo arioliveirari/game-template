@@ -11,88 +11,99 @@ export default class MainScene extends Phaser.Scene {
 
   eventCenter = EventsCenterManager.getInstance();
   player?: Player;
+
   constructor() {
     super({ key: "MainScene", active: true });
-    console.log(this.eventCenter.possibleEvents.CHANGE_PLAYER_PROPERTIES)
-    // eventos que escucha la escena
-    this.eventCenter.turnEventOn(
-      "MainScene",
-      this.eventCenter.possibleEvents.CHANGE_PLAYER_PROPERTIES,
-      (data: changeProperty) => {
-        switch (data.type) {
-          case "color":
-            this.player?.changeColor(data.value);
-            break;
-          case "size":
-            this.player?.changeSize(data.value);
-            break;
-          default:
-            break;
-        }
-      },
-      this
-    );
+    // console.log(this.eventCenter.possibleEvents.CHANGE_PLAYER_PROPERTIES)
+    // // eventos que escucha la escena
+    // this.eventCenter.turnEventOn(
+    //   "MainScene",
+    //   this.eventCenter.possibleEvents.CHANGE_PLAYER_PROPERTIES,
+    //   (data: changeProperty) => {
+    //     switch (data.type) {
+    //       case "color":
+    //         this.player?.changeColor(data.value);
+    //         break;
+    //       case "size":
+    //         this.player?.changeSize(data.value);
+    //         break;
+    //       default:
+    //         break;
+    //     }
+    //   },
+    //   this
+    // );
   }
 
 
 
   create() {
 
-    this.player = new Player(this, 100, window.innerHeight / 2, 150, 150, 0xff00ff);
+    type velocity = number
+    type obj = any & velocity
+
+    const obj1: obj = {
+      velocity: 2, // 3
+      name: "obj1"
+    }
+    const obj2: obj = {
+      velocity: 1, // 4
+      name: "obj2"
+    }
+    const obj3: obj = {
+      velocity: 3, // 3
+      name: "obj3"
+    }
     
-    const wall = this.add.rectangle(window.innerWidth / 2, window.innerHeight / 2, 100, window.innerHeight, 0x0000ff)
-
-    this.physics.add.existing(wall);
-
-    this.physics.add.collider(this.player, wall, () => {
-      if (this.player?.mainColor === wall.fillColor) {
-        console.log("HOLU 1")
-        return true
-      } else {
-        console.log("HOLU 2")
-        return false
-      }
-    }, ()=>true, this);
-
-
-    // this.time.delayedCall(2000, () => {
-    //   this.eventCenter.emitEvent(
-    //     this.eventCenter.possibleEvents.CHANGE_PLAYER_PROPERTIES,
-    //     { type: "color", value: 0xff0000 }
-    //   );
-    // }
-    // );
-
-    // this.time.delayedCall(5000, () => {
-    //   this.eventCenter.emitEvent(
-    //     this.eventCenter.possibleEvents.CHANGE_PLAYER_PROPERTIES,
-    //     { type: "size", value: 340 }
-    //   );
-    // }
-    // );
-
-    // console.log("CREO LA MAINS CENE")
-    // this.add.rectangle(0, 0, window.innerWidth, window.innerHeight, 0xffff00).setOrigin(0, 0).setAlpha(0.3).setVisible(true);  
-
-    // const testCallback: () => void = () => {
-    //   this.eventCenter.emitEvent(
-    //     this.eventCenter.possibleEvents.CHANGE_SCENE,
-    //     {
-    //       sceneToStart: "MenuScene",
-    //       sceneToStop: "MainScene",
-    //       dataToPass: { test: "test" }
-    //     }
-    //   );
-    // }
-
-    // const button = new GenericButton(this, window.innerWidth / 4, window.innerHeight / 4, "button", testCallback);
-
+    const createLinetimeForTurnOfObjects = (objects: obj[]) => {
+      let timeline: (obj[] | null)[] = new Array(12).fill(null).map(() => []);
+      
+      objects.forEach(obj => {
+        const period = this.getPeriodicyOfAttack(obj.velocity);
+        
+        if (!Array.isArray(timeline[0])) {
+          timeline[0] = [];
+        }
+        (timeline[0] as obj[]).push(obj);
+        
+        for (let i = period; i < timeline.length; i += period) {
+          if (i === 0) continue; 
+          
+          if (!Array.isArray(timeline[i])) {
+            timeline[i] = [];
+          }
+          (timeline[i] as obj[]).push(obj);
+        }
+      });
+      timeline = timeline.filter(slot => slot && slot.length)
+      timeline = timeline.map(slot => {
+        if (!slot || !slot.length) return null;
+        const uniqueObjs = Array.from(new Map(slot.map(obj => [obj.name, obj])).values());
+        return uniqueObjs.sort((a, b) => b.velocity - a.velocity);
+      });
+      timeline = timeline.flat()
+      console.log("timeline", timeline)
+      return timeline
+    }
+    createLinetimeForTurnOfObjects([obj1, obj2, obj3])
   }
 
   update() {
-    if (this.player) {
-      this.player.handleMovement();
-      this.player.handleSize();
+    // Update logic here
+  }
+
+  private getPeriodicyOfAttack(velocity: number) {
+    switch (true) {
+      case velocity === 1:
+        return 4;
+      case velocity >= 2 && velocity <= 4:
+        return 3;
+      case velocity >= 5 && velocity <= 7:
+        return 2;
+      case velocity >= 8 && velocity <= 10:
+        return 1;
+      default:
+        return 4;
     }
   }
 }
