@@ -36,13 +36,13 @@ export default class Game {
   };
 
   constructor(canvas: HTMLCanvasElement, maps: string[]) {
-    // const menuScene = new MenuScene();
-    const mainScene = new MainScene();
-    const sceneManagerScene = new SceneManagerScene();
+    const menuScene = new MenuScene();
+    // const mainScene = new MainScene();
+    // const sceneManagerScene = new SceneManagerScene();
     const betweenScenes = new BetweenScenes();
     const dataManagerGlobalmanager = new GlobalDataManager();
     this.config.canvas = canvas;
-    this.config.scene = [mainScene, sceneManagerScene, dataManagerGlobalmanager, betweenScenes ];
+    this.config.scene = [menuScene, dataManagerGlobalmanager, betweenScenes ];
   }
 
   init() {

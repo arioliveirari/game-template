@@ -1,4 +1,3 @@
-import { start } from "repl";
 import MultiScene from "./MultiScene";
 import PreLoadScene from "./PreLoadScene";
 
@@ -14,6 +13,9 @@ export type LoadTypes =
 const loadAssets = {
   BaseLoad: {
     assets: [
+      ["image", "fondoA", "/assets/backgrounds/fondoA.png"],
+      ["image", "fondoB", "/assets/backgrounds/fondoB.png"],
+      ["image", "player", "/assets/sprites/test/player.png"],
     ],
   },
 };
